@@ -23,22 +23,14 @@ class LinkedList{
 		
 		void append(int value){
 			
-			if (head_ == NULL){
-				head_ = new Node(value);
-				tail_ = head_;
+			if (head_ == NULL || tail_ == NULL){
+				tail_ = new Node(value);
+				head_ = tail_;
 			}
 			
 			else{
 				Node *new_node = new Node(value);
-				Node *prev_node, *curr_node;
-				curr_node = head_;
-							
-				while(curr_node != NULL){
-					prev_node = curr_node;
-					curr_node = curr_node->next_;
-				}
-				
-				prev_node->next_ = new_node;
+				tail_->next_ = new_node;
 				tail_ = new_node;	
 			}
 			length_++;
