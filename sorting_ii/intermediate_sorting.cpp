@@ -76,23 +76,98 @@ class MergeSort {
 	
 };
 
+class QuickSort {
+	
+	private :
+	
+		int *output_ = NULL;
+		int size_ =  0;
+		
+	public :
+	
+		int *compute( int *input, int size ){
+			
+			/* clear old data */
+			delete [] output_;
+			output_ = NULL;
+			
+			size_ = size;
+			output_ = input;
+			divide(0, size - 1);
+			return output_;
+		}
+		
+		void divide( int begin, int end ){
+			
+			int size = end - begin + 1;
+			int pivot = end;
+			int assigner = begin;
+			
+			if ( size < 1 ) return;
+			
+			for(int runner = begin; runner <= end; runner++){
+				if( output_[runner] <= output_[pivot] ){
+					swap(output_[assigner], output_[runner]);
+					assigner++;
+				}			
+			}
+			
+			pivot = assigner - 1;
+			int left_begin = begin;
+			int left_end = pivot - 1;
+			int left_size = left_end - left_begin + 1;
+			
+			int right_begin = pivot + 1;
+			int right_end = end;
+			int right_size = right_end - right_begin + 1;
+			
+			if( left_size > 1 ){
+				
+				divide( left_begin, left_end );
+			}
+			if( right_size > 1 ){
+				
+				divide( right_begin, right_end );
+			}
+		}
+		
+		void swap( int &a, int &b ){
+			int c = a;
+			a = b;
+			b = c;
+		}
+		
+	
+};
+
+void PrintList(int *input, int size){
+	cout << "[";
+	for ( int i = 0; i < size; i++ ){
+		
+		cout << " " << input[i] << " ";
+	}
+	cout << "]";
+}
 int main(){
 	
 	MergeSort test;
-	int array1[1] = {12};
-	int array2[5] = {6,7,8,9,10};
-	int array3[] = {6,7,-2,1,76,123,90,1238,9,10};
+	QuickSort test2; 
+	int array[20] = {13,23,13,13,24,-65,45,23,14,2312,6,7,-2,1,76,123,90,1238,9,10};
+	int *merged_array;
 	
-	for ( int i = 0; i < 10; i++ ){
-		
-		cout << array3[i] << " ";
-	}
+	cout << " Unsorted Array " << endl;
+	PrintList(array, 20);
+	cout << endl << endl;
+	
+	cout << " Merge Sort " << endl;
+	merged_array = test.compute(array, 20);
+	PrintList(merged_array, 20);
+	
+	cout << endl << endl;
+	
+	cout << " Quick Sort " << endl;
+	merged_array = test2.compute(array, 20);
+	PrintList(merged_array, 20);
 	cout << endl;
-	int *merged_array = test.compute(array3, 10);
-
-	for ( int i = 0; i < 10; i++ ){
-		
-		cout << merged_array[i] << " ";
-	}
-	cout << endl;
+	
 }
