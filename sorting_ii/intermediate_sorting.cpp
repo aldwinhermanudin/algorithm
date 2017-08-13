@@ -9,21 +9,34 @@ class MergeSort {
 	
 		int *compute( int* input, int input_size ){
 		
-			if ( input_size > 2 ){
-				if ( input_size == 3){
-					return merge(input, 1, compute(input+1, 2),2); 
-				}
-				
-				else{
-					int left = input_size / 2;
-					int right = input_size - left;
-					return merge(compute(input, left), left, compute(input+left,right),right);
-				}
-			}
+			int* merged_array = new int[input_size];
+			int *arr_left = NULL, *arr_right = NULL, *arr_temp = NULL;
 			
-			else{
-				return merge(input, 1, input+1, 1);
+			if ( input_size < 2 ) return NULL; // safety check
+			if ( input_size  == 2 ){
+				
+				arr_temp = merge(input, 1, input+1, 1);
 			}
+			else if ( input_size == 3){
+					
+				arr_right = compute(input+1, 2);
+				arr_temp = merge(input, 1, arr_right ,2);
+			}				
+			else{
+					
+				int left = input_size / 2;
+				int right = input_size - left;
+					
+				arr_left = compute(input, left);
+				arr_right = compute(input+left,right);
+				arr_temp = merge(arr_left, left, arr_right,right);			
+			}
+				
+			copy(arr_temp, arr_temp+input_size, merged_array);
+			delete []arr_left;
+			delete []arr_right;
+			delete []arr_temp;
+			return merged_array;
 		}
 		 
 		int *merge( int *array1, int size_array1, int *array2, int size_array2 ){
