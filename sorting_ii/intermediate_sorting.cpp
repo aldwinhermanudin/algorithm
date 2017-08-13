@@ -12,7 +12,7 @@ class MergeSort {
 			int* merged_array = new int[input_size];
 			int *arr_left = NULL, *arr_right = NULL, *arr_temp = NULL;
 			
-			if ( input_size < 2 ) return NULL; // safety check
+			if ( input_size < 2 ) return NULL; //(optional) safety check
 			if ( input_size  == 2 ){
 				
 				arr_temp = merge(input, 1, input+1, 1);
@@ -103,7 +103,7 @@ class QuickSort {
 			int pivot = end;
 			int assigner = begin;
 			
-			if ( size < 1 ) return;
+			if ( size < 1 ) return; //(optional) safety check
 			
 			for(int runner = begin; runner <= end; runner++){
 				if( output_[runner] <= output_[pivot] ){
