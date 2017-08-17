@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/misc/sanity_check/src/sanity_check.cpp
+iostream
+-
+cstdio
+-
+cstdlib
+-
+string
+-
+

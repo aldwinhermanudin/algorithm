@@ -217,11 +217,6 @@ class BinarySearchTree{
 			search_recursive(root_, value);
 		}
 		
-		void remove_recursive(int value){
-			
-			
-		}
-		
 		vector<int> in_order_traversal(){
 			traversed_bst.clear();
 			in_order_traversal(root_);	

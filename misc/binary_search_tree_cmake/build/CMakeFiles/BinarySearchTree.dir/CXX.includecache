@@ -1,0 +1,36 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/BinarySearchTree.h
+vector
+-
+Node.h
+../include/Node.h
+
+../include/Node.h
+
+/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/misc/binary_search_tree_cmake/src/BinarySearchTree.cpp
+iostream
+-
+vector
+-
+BinarySearchTree.h
+/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/misc/binary_search_tree_cmake/src/BinarySearchTree.h
+
+/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/misc/binary_search_tree_cmake/src/Node.cpp
+iostream
+-
+Node.h
+/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/misc/binary_search_tree_cmake/src/Node.h
+
+/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/misc/binary_search_tree_cmake/src/main.cpp
+iostream
+-
+BinarySearchTree.h
+-
+
