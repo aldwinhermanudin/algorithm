@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/data_structures_iii-build",
-  "command": "/usr/bin/clang++    -I/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/data_structures_iii/include  -Wall -g   -std=gnu++11 -o CMakeFiles/HashTable.dir/hash_table.cpp.o -c /home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/data_structures_iii/hash_table.cpp",
-  "file": "/home/aldwinakbar/Dropbox/Projects/campus/personal/algorithm/data_structures_iii/hash_table.cpp"
-}
-]
