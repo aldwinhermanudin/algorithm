@@ -157,8 +157,8 @@ class HashTable{
 	//private:
 	public:
 		vector<LinkedList> storage_;
-		int bucket_ = 8;
-		int size_ = 0;
+		float bucket_ = 8;
+		float size_ = 0;
 
 	//public:
 
@@ -174,19 +174,18 @@ class HashTable{
 			unsigned int hash = 5381;
 			unsigned int i = 0;
 
-			for (i = 0; i < len; i++)
-			{
+			for (i = 0; i < len; i++){
 				hash = ((hash << 5) + hash) + (key[i]);
 			}
 
 			return hash%buckets;
-
 		}
 
 		// Time Complexity:
 		// Auxiliary Space Complexity:
 		void insert(string key, int value){
 
+			resize();
 			int index = hash(key, bucket_);
 			if( storage_[index].head_ != NULL && storage_[index].get_index(key) != -1 ){
 
@@ -195,6 +194,7 @@ class HashTable{
 			else{
 
 				storage_[index].append(key, value);
+				size_++;
 			}
 		}
 
@@ -208,6 +208,7 @@ class HashTable{
 				if(chain_index != -1){
 					int value = storage_[index].get_node(key)->value_;
 					storage_[index].remove(chain_index);
+					size_--;
 					return value;
 				}
 			}
@@ -227,16 +228,42 @@ class HashTable{
 			return -1;
 		}
 
-		// Time Complexity:
-		// Auxiliary Space Complexity:
 		void resize(){
 
+				if ( (size_ / bucket_) >= 0.75 ){
+					cout << "Resized" << endl;
+					vector<LinkedList> temp_storage(storage_);
+					int temp_bucket = bucket_;
+
+					bucket_ = 2 * bucket_;
+					storage_.clear();
+					storage_.resize(bucket_);
+					size_ = 0;
+
+					for(int i = 0; i < temp_bucket; i++){
+						Node *curr_node = temp_storage[i].head_;
+          	while (curr_node != NULL){
+	        		insert(curr_node->key_, curr_node->value_);
+							curr_node = curr_node->next_;
+            }
+          }
+				}
 		}
 
+		void print(){
+			for(int i = 0; i < bucket_; i++){
+      	Node *curr_node = storage_[i].head_;
+				while (curr_node != NULL){
+					cout << "[" << i << "] " << "Key : "  << curr_node->key_ << " | Value : " << curr_node->value_ << endl;
+					curr_node = curr_node->next_;
+				}
+			}
+		}
 };
 
 int main(int argc, char** argv){
 
+	/*
 	HashTable test;
 	LinkedList test2;
 
@@ -258,14 +285,52 @@ int main(int argc, char** argv){
 	cout << endl;
 	test2.print();
 	cout << test.hash("akbar", 100) << endl;
-
+	*/
+	
 	HashTable newHash;
-
+	cout << "Start Inseert" << endl;
 	newHash.insert("hello", 5);
-	newHash.insert("great", 10);
-	cout << newHash.retrieve("hello") << " ";
-	cout << newHash.retrieve("great") << endl;
-	newHash.remove("hello");
+	newHash.insert("great", 1231);
+	newHash.insert("asd", 102);
+	newHash.insert("b", 21);
+	newHash.insert("c", 32);
+	newHash.insert("mahdi", 12);
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
+	newHash.print();
+	newHash.insert("adriel", 10);
+	cout << endl;
+	newHash.print();
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
+	newHash.insert("aldwin", 123);
+	cout << endl;
+	newHash.print();
+	newHash.insert("akbar", 321);
+	newHash.insert("hermanudin", 222);
+	newHash.insert("dean", 444);
+
+	cout << newHash.hash("hello", 8) << endl;
+
+	newHash.print();
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
+
+	cout << endl;
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
+	newHash.print();
+
+	cout << endl;
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
+	newHash.print();
+	newHash.insert("akbar", 123);
+	newHash.insert("hermanudin", 123);
+	cout << endl;
+	newHash.print();
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
+
+	newHash.insert("asdf", 123);
+	newHash.insert("asdfaa", 123);
+	cout << endl;
+	newHash.print();
+	cout << "Hash size: "<< newHash.size_ << " | Hash bucket: " << newHash.bucket_ << endl;
 
 	return 0;
 }
